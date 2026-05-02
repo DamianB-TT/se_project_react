@@ -1,0 +1,9 @@
+.cards {
+  font-family: CabinetGrotesk-Medium, sans-serif;
+}
+
+.cards__text {
+  max-height: 25px;
+  font-weight: 700;
+  font-size: 20px;
+}
