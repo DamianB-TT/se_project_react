@@ -33,6 +33,10 @@
   background-repeat: no-repeat;
 }
 
+.modal__close:hover {
+  cursor: pointer;
+}
+
 .modal__content {
   box-sizing: border-box;
   background-color: #ffffff;

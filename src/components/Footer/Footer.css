@@ -4,6 +4,9 @@
   padding: 69px 0 8px;
   font-family: CabinetGrotesk-Medium, sans-serif;
   width: 100%;
+  max-width: 1360px;
+  margin: 0 auto 24px;
+  padding: 85px 20px 0;
 }
 
 .footer__title,
