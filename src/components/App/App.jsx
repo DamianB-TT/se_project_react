@@ -21,7 +21,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(defaultClothingItems);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -43,10 +43,6 @@ function App() {
         setWeatherData(filteredData);
       })
       .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    setItems(defaultClothingItems);
   }, []);
 
   return (
@@ -129,7 +125,7 @@ function App() {
         onClose={closeActiveModal}
         card={selectedCard}
         name="image"
-        isOpen={activeModal === "image"}
+        isOpen={activeModal === "preview"}
       />
     </div>
   );

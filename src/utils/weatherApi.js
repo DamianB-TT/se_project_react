@@ -13,8 +13,8 @@ export const getWeather = ({ latitude, longitude }, apiKey) => {
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
-  result.temp = { fahrenheit: data.main.temp };
-  result.type = getWeatherType(result.temp.fahrenheit);
+  result.temp = { F: data.main.temp };
+  result.type = getWeatherType(result.temp.F);
   result.condition = data.weather[0].main.toLowerCase();
   result.isDay = isDay(data.sys, Date.now());
 
