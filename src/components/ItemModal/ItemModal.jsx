@@ -9,7 +9,7 @@ function ItemModal({ activeModal, onClose, card }) {
         <div className="modal__image-wrapper">
           <button
             onClick={onClose}
-            className="modal__close"
+            className="modal__close_type_image"
             type="button"
           ></button>
           <img src={card.link} alt={card.name} className="modal__image" />
