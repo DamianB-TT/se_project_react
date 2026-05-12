@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
-import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import {
@@ -40,6 +41,25 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const onAddItem = (inputValues, handleReset) => {
+    const newCardData = {
+      name: inputValues.name,
+      imageUrl: inputValues.link,
+      weather: inputValues.weatherType,
+    };
+
+    setItems([...items, newCardData]);
+    closeActiveModal();
+
+    // postItem(newCardData)
+    //   .then((data) => {
+    //     setClothingItems([data, ...clothingItems]);
+    //     handleReset();
+    //     closeActiveModal();
+    //   })
+    //   .catch((error) => console.error("Failed to add item:", error));
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -60,81 +80,26 @@ function App() {
       <div className="page">
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            items={items}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  items={items}
+                />
+              }
+            />
+            <Route path="/profile" element={<p>profile</p>} />
+          </Routes>
         </div>
         <Footer />
-        <ModalWithForm
-          buttonText="Add garment"
-          titleText="New garment"
+        <AddItemModal
           onClose={closeActiveModal}
-          name="add-garment"
           isOpen={activeModal === "add-garment"}
-        >
-          <label htmlFor="name" className="modal__label">
-            Name{" "}
-            <input
-              type="text"
-              className="modal__input"
-              placeholder="Name"
-              id="name"
-            />
-          </label>
-          <label htmlFor="imageUrl" className="modal__label">
-            Image{" "}
-            <input
-              type="url"
-              className="modal__input"
-              placeholder="Image URL"
-              id="imageUrl"
-            />
-          </label>
-          <fieldset className="modal__radio-buttons">
-            <legend className="modal__legend">Select the weather type:</legend>
-            <label
-              htmlFor="hot"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                type="radio"
-                className="modal__radio-input"
-                id="hot"
-                name="weather"
-                value="hot"
-              />{" "}
-              Hot
-            </label>
-            <label
-              htmlFor="warm"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                type="radio"
-                className="modal__radio-input"
-                id="warm"
-                name="weather"
-                value="warm"
-              />{" "}
-              Warm
-            </label>
-            <label
-              htmlFor="cold"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                type="radio"
-                className="modal__radio-input"
-                id="cold"
-                name="weather"
-                value="cold"
-              />{" "}
-              Cold
-            </label>
-          </fieldset>
-        </ModalWithForm>
+          onAddItem={onAddItem}
+        />
         <ItemModal
           onClose={closeActiveModal}
           card={selectedCard}
