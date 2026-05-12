@@ -1,0 +1,40 @@
+.clothes-section {
+  font-family: CabinetGrotesk-Medium, sans-serif;
+  padding-top: 31px;
+}
+
+.clothes-section__row {
+  display: flex;
+}
+
+.clothes-section__text {
+  max-height: 25px;
+  width: 94px;
+  font-size: 20px;
+  margin: 0;
+  font-weight: 700;
+  padding: 0 20px 16px 0;
+}
+
+.clothes-section__button {
+  font-size: 20px;
+  font-weight: 700;
+  max-height: 25px;
+  width: 88px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.clothes-section__items {
+  display: flex;
+  gap: 21px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}

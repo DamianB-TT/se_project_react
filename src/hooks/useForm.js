@@ -10,8 +10,10 @@ export function useForm(defaultValues) {
       [name]: value,
     });
   };
+
   const handleReset = () => {
     setValues(defaultValues);
   };
+
   return { values, handleChange, setValues, handleReset };
 }

@@ -24,6 +24,7 @@
   border-radius: 19px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   width: 100%;
+  max-height: 323px;
   height: auto;
 }
 

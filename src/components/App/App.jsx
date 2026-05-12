@@ -7,13 +7,11 @@ import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import Profile from "../Profile/Profile.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import {
-  coordinates,
-  apiKey,
-  defaultClothingItems,
-} from "../../utils/constants.js";
+import { coordinates, apiKey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit.jsx";
+import { getItems, addItem, removeItem } from "../../utils/api.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -25,7 +23,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [items, setItems] = useState(defaultClothingItems);
+  const [items, setItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleToggleSwitchChange = () => {
@@ -44,20 +42,28 @@ function App() {
   const onAddItem = (inputValues, handleReset) => {
     const newCardData = {
       name: inputValues.name,
-      imageUrl: inputValues.link,
+      imageUrl: inputValues.imageUrl,
       weather: inputValues.weatherType,
     };
 
-    setItems([...items, newCardData]);
-    closeActiveModal();
+    addItem(newCardData)
+      .then((data) => {
+        setItems([data, ...items]);
+        handleReset();
+        closeActiveModal();
+      })
+      .catch((error) => console.error("Failed to add item: ", error));
+  };
 
-    // postItem(newCardData)
-    //   .then((data) => {
-    //     setClothingItems([data, ...clothingItems]);
-    //     handleReset();
-    //     closeActiveModal();
-    //   })
-    //   .catch((error) => console.error("Failed to add item:", error));
+  const handleDelete = (card) => {
+    removeItem(card._id)
+      .then(() => {
+        setItems((prevItems) =>
+          prevItems.filter((item) => item._id !== card._id),
+        );
+        closeActiveModal();
+      })
+      .catch((error) => console.error("Failed to delete item: ", error));
   };
 
   const closeActiveModal = () => {
@@ -69,6 +75,12 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+      })
+      .catch(console.error);
+
+    getItems()
+      .then((data) => {
+        setItems(data);
       })
       .catch(console.error);
   }, []);
@@ -91,7 +103,16 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<p>profile</p>} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  items={items}
+                  handleCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
+                />
+              }
+            />
           </Routes>
         </div>
         <Footer />
@@ -105,6 +126,7 @@ function App() {
           card={selectedCard}
           name="image"
           isOpen={activeModal === "preview"}
+          handleDelete={handleDelete}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

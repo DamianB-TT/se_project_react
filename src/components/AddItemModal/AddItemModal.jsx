@@ -4,7 +4,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const defaultValues = {
     name: "",
-    link: "",
+    imageUrl: "",
     weatherType: "hot",
   };
 
@@ -44,9 +44,9 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           className="modal__input"
           placeholder="Image URL"
           id="imageUrl"
-          name="link"
+          name="imageUrl"
           required
-          value={values.link}
+          value={values.imageUrl}
           onChange={handleChange}
         />
       </label>
