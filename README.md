@@ -1,4 +1,4 @@
-# 🌤️ WTWR (What to Wear Right Now)
+# 🌤️ WTWR (What to Wear)
 
 A weather-based clothing recommendation web application.
 
