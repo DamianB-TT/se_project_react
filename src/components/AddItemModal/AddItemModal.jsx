@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 
@@ -14,6 +15,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     evt.preventDefault();
     onAddItem(values, handleReset);
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      handleReset(defaultValues);
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm
@@ -59,6 +66,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             id="hot"
             name="weatherType"
             value="hot"
+            checked={values.weatherType === "hot"}
             onChange={handleChange}
           />{" "}
           Hot
@@ -70,6 +78,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             id="warm"
             name="weatherType"
             value="warm"
+            checked={values.weatherType === "warm"}
             onChange={handleChange}
           />{" "}
           Warm
@@ -81,6 +90,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             id="cold"
             name="weatherType"
             value="cold"
+            checked={values.weatherType === "cold"}
             onChange={handleChange}
           />{" "}
           Cold
