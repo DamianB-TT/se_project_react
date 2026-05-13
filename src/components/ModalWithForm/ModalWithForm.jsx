@@ -9,8 +9,22 @@ function ModalWithForm({
   isOpen,
   onSubmit,
 }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isOpen, onClose]);
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) onClose();
+  };
+
   return (
     <div
+      onClick={handleOverlayClick}
       className={`modal modal_type_${name} ${isOpen ? "modal_is-opened" : ""}`}
     >
       <div className="modal__content">

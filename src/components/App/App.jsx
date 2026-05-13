@@ -10,7 +10,7 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { coordinates, apiKey } from "../../utils/constants.js";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit.jsx";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
 
 function App() {
