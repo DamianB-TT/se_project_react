@@ -51,3 +51,38 @@
   color: black;
   text-decoration: none;
 }
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header__avatar_placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0d4b0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+.header__auth-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.header__btn {
+  background: none;
+  border: none;
+  font-family: CabinetGrotesk-Bold, sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header__btn:hover {
+  opacity: 0.6;
+}

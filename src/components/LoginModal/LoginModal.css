@@ -1,0 +1,11 @@
+.modal_type_login .modal__submit-btn {
+  width: 73px;
+}
+
+.modal__error {
+  margin: 24px 0 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #ff4d00;
+}

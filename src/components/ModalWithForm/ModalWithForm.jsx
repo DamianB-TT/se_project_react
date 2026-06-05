@@ -9,6 +9,9 @@ function ModalWithForm({
   name,
   isOpen,
   onSubmit,
+  onAltClick,
+  altText,
+  isFormValid,
 }) {
   useEffect(() => {
     if (!isOpen) return;
@@ -37,9 +40,24 @@ function ModalWithForm({
         ></button>
         <form onSubmit={onSubmit} name={name} className="modal__form">
           {children}
-          <button className="modal__submit-btn" type="submit">
-            {buttonText}
-          </button>
+          <div className="modal__button-row">
+            <button
+              className="modal__submit-btn"
+              type="submit"
+              disabled={isFormValid !== undefined ? !isFormValid : false}
+            >
+              {buttonText}
+            </button>
+            {onAltClick && (
+              <button
+                type="button"
+                className="modal__alt-btn"
+                onClick={onAltClick}
+              >
+                {altText}
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>
