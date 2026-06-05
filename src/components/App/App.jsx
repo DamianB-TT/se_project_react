@@ -68,6 +68,7 @@ function App() {
         setCurrentUser(userData);
         setIsLoggedIn(true);
         closeActiveModal();
+        navigate("/");
       })
       .catch((err) => {
         console.error("Login failed:", err);
@@ -92,7 +93,7 @@ function App() {
     const token = localStorage.getItem("jwt");
     updateUser({ name, avatar }, token)
       .then((updatedUser) => {
-        setCurrentUser(updatedUser);
+        setCurrentUser((prev) => ({ ...prev, ...updatedUser }));
         closeActiveModal();
       })
       .catch((err) => console.error("Failed to update profile:", err));
@@ -107,7 +108,7 @@ function App() {
     };
     addItem(newCardData, token)
       .then((data) => {
-        setItems([data, ...items]);
+        setItems((prev) => [data, ...prev]);
         handleReset();
         closeActiveModal();
       })

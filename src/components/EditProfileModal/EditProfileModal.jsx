@@ -6,7 +6,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 function EditProfileModal({ isOpen, onClose, onEditProfile }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const { values, handleChange, handleReset, setValues } = useForm({
+  const { values, handleChange, setValues } = useForm({
     name: "",
     avatar: "",
   });
