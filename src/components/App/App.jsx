@@ -155,12 +155,26 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getWeather(coordinates, apiKey)
-      .then((data) => {
-        const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
-      })
-      .catch(console.error);
+    const fetchWeather = (coords) => {
+      getWeather(coords, apiKey)
+        .then((data) => {
+          const filteredData = filterWeatherData(data);
+          setWeatherData(filteredData);
+        })
+        .catch(console.error);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchWeather({ latitude, longitude });
+        },
+        () => fetchWeather(coordinates)
+      );
+    } else {
+      fetchWeather(coordinates);
+    }
 
     getItems()
       .then((data) => setItems(data))
